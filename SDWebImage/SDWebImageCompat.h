@@ -48,8 +48,10 @@
 #endif
 
 #if OS_OBJECT_USE_OBJC
+    #undef SDDispatchQueueSetterSementics
     #define SDDispatchQueueSetterSementics strong
 #else
+    #undef SDDispatchQueueSetterSementics
     #define SDDispatchQueueSetterSementics assign
 #endif
 
