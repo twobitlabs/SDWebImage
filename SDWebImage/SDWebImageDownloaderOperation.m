@@ -31,6 +31,11 @@
     BOOL responseFromCached;
 }
 
+// TwoBitLabs: added for Xcode 6 compatibility:
+// from https://github.com/rs/SDWebImage/commit/3b32f1dd9df5c7eba813d7a955577ae9b2d578a0 (see comments in parent commits)
+@synthesize executing = _executing;
+@synthesize finished = _finished;
+
 - (id)initWithRequest:(NSURLRequest *)request queue:(dispatch_queue_t)queue options:(SDWebImageDownloaderOptions)options progress:(void (^)(NSUInteger, long long))progressBlock completed:(void (^)(UIImage *, NSData *, NSError *, BOOL))completedBlock cancelled:(void (^)())cancelBlock
 {
     if ((self = [super init]))
