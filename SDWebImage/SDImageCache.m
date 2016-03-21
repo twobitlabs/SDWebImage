@@ -116,7 +116,13 @@ static const NSInteger kDefaultCacheMaxCacheAge = 60 * 60 * 24 * 7; // 1 week
                 if (image)
                 {
 #if TARGET_OS_IPHONE
-                    data = UIImageJPEGRepresentation(image, (CGFloat)1.0);
+                    int alphaInfo = CGImageGetAlphaInfo(image.CGImage);
+                    BOOL hasAlpha = !(alphaInfo == kCGImageAlphaNone || alphaInfo == kCGImageAlphaNoneSkipFirst || alphaInfo == kCGImageAlphaNoneSkipLast);
+                    if (hasAlpha) {
+                        data = UIImagePNGRepresentation(image);
+                    } else {
+                        data = UIImageJPEGRepresentation(image, (CGFloat)1.0);
+                    }
 #else
                     data = [NSBitmapImageRep representationOfImageRepsInArray:image.representations usingType: NSJPEGFileType properties:nil];
 #endif
